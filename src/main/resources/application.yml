@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/Workout
+    username: root
+    password: michael1
+  jpa:
+    show-sql: true
