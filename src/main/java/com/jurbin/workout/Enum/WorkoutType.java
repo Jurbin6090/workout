@@ -1,4 +1,4 @@
-package com.jurbin.workout.workout.Enum;
+package com.jurbin.workout.Enum;
 
 public enum WorkoutType {
     Bench,

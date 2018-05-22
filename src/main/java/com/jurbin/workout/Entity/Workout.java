@@ -1,6 +1,6 @@
-package com.jurbin.workout.workout.Entity;
+package com.jurbin.workout.Entity;
 
-import com.jurbin.workout.workout.Enum.WorkoutType;
+import com.jurbin.workout.Enum.WorkoutType;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -15,6 +15,10 @@ public class Workout {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(name="user_id")
+    @NotNull
+    private String userId;
 
     @Column(name="workout_date")
     @NotNull
@@ -33,6 +37,14 @@ public class Workout {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public Date getDate() {

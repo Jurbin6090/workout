@@ -1,8 +1,7 @@
-package com.jurbin.workout.Configuration;
+package com.jurbin.workout;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication(scanBasePackages = {"com.jurbin.workout"})
 public class WorkoutApplication {

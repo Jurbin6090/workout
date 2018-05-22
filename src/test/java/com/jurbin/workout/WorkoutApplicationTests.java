@@ -1,4 +1,4 @@
-package com.jurbin.workout.workout;
+package com.jurbin.workout;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

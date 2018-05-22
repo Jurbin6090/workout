@@ -1,31 +1,61 @@
-package com.jurbin.workout.workout.Controller;
+package com.jurbin.workout.Controller;
 
-import com.jurbin.workout.workout.Entity.Workout;
-import com.jurbin.workout.workout.Repository.WorkoutRepository;
+import com.jurbin.workout.Entity.Workout;
+import com.jurbin.workout.Entity.WorkoutSet;
+import com.jurbin.workout.Repository.WorkoutRepository;
+import com.jurbin.workout.Repository.WorkoutSetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-@RestController("/workout")
+@RestController
 public class WorkoutController {
 
     @Autowired
     WorkoutRepository workoutRepository;
 
-    @PostMapping
+    @Autowired
+    WorkoutSetRepository workoutSetRepository;
+
+    @PostMapping("/workout")
     public Workout createWorkout(@RequestBody Workout workout) {
-        return workoutRepository.save(workout);
+        workout = workoutRepository.save(workout);
+
+        for (WorkoutSet workoutSet : workout.getWorkoutSetList()) {
+            workoutSet.setWorkout(workout);
+            workoutSetRepository.save(workoutSet);
+        }
+
+        return workout;
     }
 
-    @GetMapping
+    @GetMapping("/workout")
     public List<Workout> getWorkouts() {
         List<Workout> workoutList = new ArrayList<>();
         workoutRepository.findAll().forEach(workoutList::add);
         return workoutList;
+    }
+
+    @GetMapping("/workout/date")
+    public List<Workout> getWorkouts(@RequestParam(value = "date") @DateTimeFormat(pattern = "MMddyyyy") Date date) {
+        List<Workout> workoutList = new ArrayList<>();
+        workoutRepository.findAllByDate(date).forEach(workoutList::add);
+        return workoutList;
+    }
+
+    @PatchMapping("/workout")
+    public Workout updateWorkout(@RequestBody Workout workout){
+        for (WorkoutSet workoutSet : workout.getWorkoutSetList()) {
+            workoutSet.setWorkout(workout);
+            workoutSetRepository.save(workoutSet);
+        }
+
+        workout = workoutRepository.save(workout);
+
+        return workout;
     }
 }
