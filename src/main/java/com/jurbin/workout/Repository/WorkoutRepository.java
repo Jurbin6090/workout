@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface WorkoutRepository extends CrudRepository<Workout, Integer> {
     public List<Workout> findAllByDate(Date date);
+    public List<Workout> findAllByUserId(String userId);
 }

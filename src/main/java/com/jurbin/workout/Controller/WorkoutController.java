@@ -42,9 +42,16 @@ public class WorkoutController {
     }
 
     @GetMapping("/workout/date")
-    public List<Workout> getWorkouts(@RequestParam(value = "date") @DateTimeFormat(pattern = "MMddyyyy") Date date) {
+    public List<Workout> getWorkoutByDate(@RequestParam(value = "date") @DateTimeFormat(pattern = "MMddyyyy") Date date) {
         List<Workout> workoutList = new ArrayList<>();
         workoutRepository.findAllByDate(date).forEach(workoutList::add);
+        return workoutList;
+    }
+
+    @GetMapping("/workout/user/{userId}")
+    public List<Workout> getWorkoutByUserId(@PathVariable String userId) {
+        List<Workout> workoutList = new ArrayList<>();
+        workoutRepository.findAllByUserId(userId).forEach(workoutList::add);
         return workoutList;
     }
 
