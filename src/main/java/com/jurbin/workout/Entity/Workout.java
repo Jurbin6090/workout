@@ -1,4 +1,6 @@
-package com.jurbin.workout.workout;
+package com.jurbin.workout.workout.Entity;
+
+import com.jurbin.workout.workout.Enum.WorkoutType;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

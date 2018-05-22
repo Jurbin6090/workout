@@ -1,4 +1,4 @@
-package com.jurbin.workout.workout;
+package com.jurbin.workout.workout.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
