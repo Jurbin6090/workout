@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class WorkoutController {
@@ -57,5 +58,25 @@ public class WorkoutController {
         workout = workoutRepository.save(workout);
 
         return workout;
+    }
+
+    @DeleteMapping("/workout/{id}")
+    public Boolean deleteWorkout(@PathVariable Integer id){
+        Optional<Workout> workout = workoutRepository.findById(id);
+
+        if(workout.isPresent()){
+            for (WorkoutSet workoutSet : workout.get().getWorkoutSetList()) {
+                workoutSetRepository.deleteById(workoutSet.getId());
+            }
+        }
+
+        workoutRepository.deleteById(id);
+        return true;
+    }
+
+    @DeleteMapping("set/{id}")
+    public Boolean deleteSet(@PathVariable Integer id){
+        workoutSetRepository.deleteById(id);
+        return true;
     }
 }
