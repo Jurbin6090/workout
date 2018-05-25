@@ -2,6 +2,7 @@ package com.jurbin.workout.Controller;
 
 import com.jurbin.workout.Entity.Workout;
 import com.jurbin.workout.Entity.WorkoutSet;
+import com.jurbin.workout.Enum.WorkoutType;
 import com.jurbin.workout.Repository.WorkoutRepository;
 import com.jurbin.workout.Repository.WorkoutSetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +54,13 @@ public class WorkoutController {
     public List<Workout> getWorkoutByUserId(@PathVariable String userId) {
         List<Workout> workoutList = new ArrayList<>();
         workoutRepository.findAllByUserId(userId).forEach(workoutList::add);
+        return workoutList;
+    }
+
+    @GetMapping("/workout/user/{userId}/workoutType/{workoutType}")
+    public List<Workout> getWorkoutByUserIdAndType(@PathVariable String userId, @PathVariable WorkoutType workoutType) {
+        List<Workout> workoutList = new ArrayList<>();
+        workoutRepository.findAllByUserIdAndWorkoutTypeOrderByDateDesc(userId, workoutType).forEach(workoutList::add);
         return workoutList;
     }
 

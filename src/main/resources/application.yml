@@ -1,7 +1,7 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost/Workout
+    url: jdbc:mysql://localhost/workout
     username: root
-    password: michael1
+    password: windowwasher1
   jpa:
     show-sql: true
