@@ -38,5 +38,15 @@ public class LoginController {
         return loginRepository.save(login);
     }
 
+    @PostMapping("/create-login")
+    public Login createAccount(@RequestBody Login login) {
+        login = loginRepository.save(login);
+
+        if(login.getUsername() != null & login.getPassword() != null) {
+            loginRepository.save(login);
+        }
+
+        return login;
+    }
 
 }
